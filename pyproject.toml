@@ -3,8 +3,8 @@ requires = ["setuptools>=69.0.3", "setuptools_scm>=8.0.4"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "calicolabs-$HYPHENATED_PACKAGE_NAME"
-description = "Python Library for $HYPHENATED_PACKAGE_NAME"
+name = "calicolabs-piccolo"
+description = "Python Library for piccolo"
 authors = [
     {name = "Calico Data Engineering Team", email = "calico-data-eng@calicolabs.com"},
 ]
@@ -27,7 +27,7 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/calico/$HYPHENATED_PACKAGE_NAME"
-"Bug Tracker" = "https://github.com/calico/$HYPHENATED_PACKAGE_NAME/issues"
+Homepage = "https://github.com/calico/piccolo"
+"Bug Tracker" = "https://github.com/calico/piccolo/issues"
 
 [tool.setuptools_scm]

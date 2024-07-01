@@ -1,6 +1,6 @@
-[![Build/Release Python Package](https://github.com/calico/github-template-python-library/actions/workflows/release-new-version.yml/badge.svg?branch=main)](https://github.com/calico/github-template-python-library/actions/workflows/release-new-version.yml)
-[![Python formatting and tests](https://github.com/calico/github-template-python-library/actions/workflows/run-tests-formatting.yml/badge.svg?branch=main)](https://github.com/calico/github-template-python-library/actions/workflows/run-tests-formatting.yml)
-[![Validate prettier formatting](https://github.com/calico/github-template-python-library/actions/workflows/check-prettier-formatting.yml/badge.svg?branch=main)](https://github.com/calico/github-template-python-library/actions/workflows/check-prettier-formatting.yml)
+[![Build/Release Python Package](https://github.com/calico/calicolabs-piccolo/actions/workflows/release-new-version.yml/badge.svg?branch=main)](https://github.com/calico/calicolabs-piccolo/actions/workflows/release-new-version.yml)
+[![Python formatting and tests](https://github.com/calico/calicolabs-piccolo/actions/workflows/run-tests-formatting.yml/badge.svg?branch=main)](https://github.com/calico/calicolabs-piccolo/actions/workflows/run-tests-formatting.yml)
+[![Validate prettier formatting](https://github.com/calico/calicolabs-piccolo/actions/workflows/check-prettier-formatting.yml/badge.svg?branch=main)](https://github.com/calico/calicolabs-piccolo/actions/workflows/check-prettier-formatting.yml)
 
 # Github Template for Calico's Python Library
 
