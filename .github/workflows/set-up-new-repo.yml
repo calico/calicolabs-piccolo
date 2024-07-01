@@ -1,0 +1,134 @@
+name: Set up new Python library repo
+
+on:
+  workflow_dispatch:
+    inputs:
+      packageName:
+        description: "Python package name. No spacing or hyphens."
+        required: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  set-up-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check repo name validity
+        run: |
+          # Calico Python library repo names need to begin with calicolabs-
+          repo_name=${{ github.event.repository.name }}
+          echo "REPO_NAME=$repo_name" >> $GITHUB_ENV
+          if [[ $repo_name != calicolabs-* ]]; then
+            echo "Repo name needs to begin with calicolabs-"
+            exit 1
+          fi
+
+      - name: Check Python package validity
+        run: |
+          python_package_name=${{ inputs.packageName }}
+
+          if [[ $python_package_name == *" "* ]]; then
+            echo "Python package name cannot have spaces"
+            exit 1
+          fi
+
+          if [[ $python_package_name == *"-"* ]]; then
+            echo "Python package name cannot have hyphens"
+            exit 1
+          fi
+
+          echo "Python package name $python_package_name is valid!"
+
+      - name: Set up environment variable from input
+        run: |
+          python_package_name=${{ inputs.packageName }}
+          # replace underscores with hyphens
+          hyphenated_package_name=${python_package_name//_/-}  
+          echo "PYTHON_PACKAGE_NAME=$python_package_name" >> $GITHUB_ENV
+          echo "Setting PYTHON_PACKAGE_NAME to: $python_package_name"
+          echo "HYPHENATED_PACKAGE_NAME=$hyphenated_package_name" >> $GITHUB_ENV
+          echo "Setting HYPHENATED_PACKAGE_NAME to: $hyphenated_package_name"
+
+      - name: Checkout current repo
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_REPO_SETUP_KEY }}
+
+      - name: Configure git
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+      - name: Make a new branch
+        run: |
+          git checkout -b set-up-new-repo
+
+      - name: Updating README
+        run: |
+          sed_expr="s/github-template-python-library/${{ env.REPO_NAME }}/g"
+          cat README.md | sed "s/github-template-python-library/${{ env.REPO_NAME }}/g" > README.md_new
+          mv README.md_new README.md
+
+          git add --all
+          git commit -m "Update README"
+
+      - name: Modify setup.cfg and pyproject.toml
+        run: |
+          envsubst < setup.cfg > setup.cfg_new && mv setup.cfg_new setup.cfg
+          envsubst < pyproject.toml > pyproject.toml_new && mv pyproject.toml_new pyproject.toml
+
+          git add --all
+          git commit -m "Update setup.cfg and pyproject.toml"
+
+      - name: Update package folder and update versioning package
+        run: |
+          export dir_name=$PYTHON_PACKAGE_NAME
+          mv src/package_name src/$dir_name
+          cd src/$dir_name
+          envsubst < __init__.py > __init__.py_new && mv __init__.py_new __init__.py
+          cd - > /dev/null
+
+          git add --all
+          git commit -m "Update package folder and update versioning package"
+
+      - name: Add collaborators
+        run: |
+          gh api -X PUT /orgs/calico/teams/sweng-dev/repos/calico/{repo} \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            -f permission='maintain'
+          gh api -X PUT /orgs/calico/teams/data-eng-dev/repos/calico/{repo} \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            -f permission='admin'
+        env:
+          GH_TOKEN: ${{ secrets.GH_REPO_SETUP_KEY }}
+
+      - name: Configure Branch Protection
+        uses: calico/calico-github-actions/.github/actions/configure-branch-protection@main
+        with:
+          token: ${{ secrets.GH_REPO_SETUP_KEY }}
+
+      - name: Configure New Repo Settings
+        uses: calico/calico-github-actions/.github/actions/configure-new-repo-settings@main
+        with:
+          token: ${{ secrets.GH_REPO_SETUP_KEY }}
+
+      - name: Remove set up workflow
+        run: |
+          # remove this github workflow
+          git rm .github/workflows/set-up-new-repo.yml
+          git commit -m "Remove set up workflow"
+
+      - name: Print git diff and push branch
+        run: |
+          echo "DIFF:" && git diff main && echo
+          git push -u origin set-up-new-repo
+
+      - name: Create PR
+        run: |
+          gh pr create --title "Set up new workflow repo" --body "New PR setup"
+        env:
+          GH_TOKEN: ${{ secrets.GH_REPO_SETUP_KEY }}

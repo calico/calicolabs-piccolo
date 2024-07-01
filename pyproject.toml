@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=69.0.3", "setuptools_scm>=8.0.4"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "calicolabs-$HYPHENATED_PACKAGE_NAME"
+description = "Python Library for $HYPHENATED_PACKAGE_NAME"
+authors = [
+    {name = "Calico Data Engineering Team", email = "calico-data-eng@calicolabs.com"},
+]
+readme = "README.md"
+classifiers = ["License :: OSI Approved :: MIT License"]
+dynamic = ["version"]
+
+requires-python = ">=3.11"
+dependencies = [
+    "calicolabs-calico-logging~=0.2.2",
+#    "package~=3.17.0",
+#    "package2~=3.15.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black~=23.12.1",
+    "pytest~=7.4.4",
+    "ruff~=0.1.11",
+]
+
+[project.urls]
+Homepage = "https://github.com/calico/$HYPHENATED_PACKAGE_NAME"
+"Bug Tracker" = "https://github.com/calico/$HYPHENATED_PACKAGE_NAME/issues"
+
+[tool.setuptools_scm]
