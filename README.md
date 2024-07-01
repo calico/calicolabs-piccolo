@@ -1,20 +1,6 @@
-[![Build/Release Python Package](https://github.com/calico/calicolabs-piccolo/actions/workflows/release-new-version.yml/badge.svg?branch=main)](https://github.com/calico/calicolabs-piccolo/actions/workflows/release-new-version.yml)
-[![Python formatting and tests](https://github.com/calico/calicolabs-piccolo/actions/workflows/run-tests-formatting.yml/badge.svg?branch=main)](https://github.com/calico/calicolabs-piccolo/actions/workflows/run-tests-formatting.yml)
-[![Validate prettier formatting](https://github.com/calico/calicolabs-piccolo/actions/workflows/check-prettier-formatting.yml/badge.svg?branch=main)](https://github.com/calico/calicolabs-piccolo/actions/workflows/check-prettier-formatting.yml)
-
-# Github Template for Calico's Python Library
-
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://twitter.com/PrettierCode)
-
-Create internal Python packages using this template.
-
 ## Repo setup
 
-1. Create a new `calicolabs-{python-library-name}` Github repo using this template. The new repo name must have a `calicolabs-` prefix.
-2. Navigate to **Actions** > `Set up new Python library repo` > Run workflow. The `packageName` input cannot have spaces or hyphens. If you need to use multiple words, separate them by underscores. This name can be anything that makes sense to you. It will be what replaces the package_name folder under the src directory. For example, your input at this step will be used in importing like `from package_name.some_sub_folder.some_file import some_function` when you write your code.
-3. This will create a new PR and upon review and approval, merge into `main`. Your Python library repo is now ready to use!
+Explain steps to run code locally here
 
 ## Additional setup
 
@@ -29,12 +15,6 @@ Where possible, please add `~=` instead of `==`
 #    "package2~=3.15.1",
 #]
 ```
-
-## Push the versioned package to Calico-PyPI (our internal repository)
-
-Note: We follow **[Semantic Versioning](https://semver.org/)** for versioning Python packages.
-
-1. Navigate to **Actions** > `Build/Release Python Package` > Run workflow. This will build and push your versioned package to Calico-PyPI.
 
 ## Formatting
 
