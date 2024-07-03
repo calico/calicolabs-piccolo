@@ -6,17 +6,16 @@ build-backend = "setuptools.build_meta"
 name = "calicolabs-piccolo"
 description = "Python Library for piccolo"
 authors = [
-    {name = "Calico Data Engineering Team", email = "calico-data-eng@calicolabs.com"},
+    {name = "Kendra Nyberg", email = "nyberg@calicolabs.com"},
 ]
 readme = "README.md"
-classifiers = ["License :: OSI Approved :: MIT License"]
+classifiers = ["License :: Apache 2.0"]
 dynamic = ["version"]
 
-requires-python = ">=3.11"
+requires-python = ">=3.8.5"
 dependencies = [
-    "calicolabs-calico-logging~=0.2.2",
-#    "package~=3.17.0",
-#    "package2~=3.15.1",
+    "numpy~=1.24.4",
+    "bokeh~=3.1.1",
 ]
 
 [project.optional-dependencies]
