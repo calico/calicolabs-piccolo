@@ -34,5 +34,5 @@ Run with `bokeh serve --show ui_layout.py`
 
 #### Dependencies
 
-python >= 3.8.5
+python >= 3.8.5\
 bokeh = 3.4.1
