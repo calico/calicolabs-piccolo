@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=69.0.3", "setuptools_scm>=8.0.4"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "calicolabs-piccolo"
+description = "Python Library for piccolo"
+authors = [
+    {name = "Kendra Nyberg", email = "nyberg@calicolabs.com"},
+]
+readme = "README.md"
+classifiers = ["License :: Apache 2.0"]
+dynamic = ["version"]
+
+requires-python = ">=3.8.5"
+dependencies = [
+    "numpy~=1.24.4",
+    "bokeh~=3.4.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black~=23.12.1",
+    "pytest~=7.4.4",
+    "ruff~=0.1.11",
+]
+
+[project.urls]
+Homepage = "https://github.com/calico/piccolo"
+"Bug Tracker" = "https://github.com/calico/piccolo/issues"
+
+[tool.setuptools_scm]
