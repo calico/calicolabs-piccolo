@@ -8,6 +8,9 @@ Piccolo provides tools for droplet processing instruments:
 2. Display and interact with test data across different channels and set sorting gates in a UI
 
 
+![ScreenShot](/screenshot.png?raw=true)
+
+
 ---
 
 #### Contacts
